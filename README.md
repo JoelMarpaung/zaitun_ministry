@@ -1,16 +1,19 @@
-# zaitun_ministry
+# Zaitun Ministry
 
-A new Flutter project.
+Zaitun Ministry Mobile Application
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This application is built with flutter.
+Version 1.0.1
+Update :
+- Change app name
+- Fixing some content
 
-A few resources to get you started if this is your first Flutter project:
+Version 1.0.0
+Feature :
+- Radio Online
+- Worship Schedule
+- Info about zaitun ministry
+- Google map to show zaitun ministry location
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
