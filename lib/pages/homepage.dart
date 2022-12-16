@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -17,30 +17,43 @@ class _HomePageState extends State<HomePage> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    RadioPage(),
+    const Scaffold(),
+    const RadioPage(),
     const Scaffold(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.blueGrey,
-        selectedItemColor: Colors.black,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.radio),
-            label: 'Radio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.radio),
-            label: 'Radio 2',
-          ),
-        ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _onItemTapped(1);
+        },
+        child: const Icon(Icons.radio),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                _onItemTapped(0);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.school),
+              onPressed: () {
+                _onItemTapped(2);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+

@@ -35,12 +35,12 @@ class RadioDataSourceImpl implements RadioDataSource{
       await audioPlayer.setUrl(url);
       _isUrlSet = true;
     }
-    return audioPlayer.play();
+    return await audioPlayer.play();
   }
 
   @override
-  Future<void> stopRadio() {
-    return audioPlayer.pause();
+  Future<void> stopRadio() async{
+    return await audioPlayer.stop();
   }
 
 }
