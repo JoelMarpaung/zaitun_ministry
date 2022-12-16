@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:radio/presentation/bloc/data_radio_bloc/data_radio_bloc.dart';
-import 'package:radio/presentation/bloc/data_radio_bloc/data_radio_event.dart';
-import 'package:radio/presentation/bloc/data_radio_bloc/data_radio_state.dart';
+import 'package:radio/presentation/bloc/radio_data_bloc/data_radio_bloc.dart';
+import 'package:radio/presentation/bloc/radio_data_bloc/data_radio_event.dart';
+import 'package:radio/presentation/bloc/radio_data_bloc/data_radio_state.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

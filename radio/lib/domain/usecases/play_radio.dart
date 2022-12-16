@@ -2,14 +2,11 @@ import 'package:core/common/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:radio/domain/repositories/radio_repository.dart';
 
-import '../entities/radio.dart';
-
-class GetDataRadio {
+class PlayRadio {
   final RadioRepository repository;
-  GetDataRadio(this.repository);
+  PlayRadio(this.repository);
 
-  Future<Either<Failure, Radio>> execute(){
-    return repository.getDataRadio();
+  Future<Either<Failure, void>> play(url){
+    return repository.playRadio(url);
   }
-
 }

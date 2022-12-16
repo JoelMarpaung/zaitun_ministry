@@ -18,7 +18,6 @@ class DataRadioBloc extends Bloc<RadioEvent, RadioState> {
         (failure) async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString(streamPref, streamUrl);
-
         },
         (data) async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
