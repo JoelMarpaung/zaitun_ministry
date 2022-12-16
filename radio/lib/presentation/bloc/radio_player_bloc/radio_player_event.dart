@@ -5,8 +5,7 @@ abstract class RadioPlayerEvent extends Equatable {
 }
 
 class OnPlayRadio extends RadioPlayerEvent {
-  final String url;
-  const OnPlayRadio(this.url);
+  const OnPlayRadio();
 
   @override
   List<Object> get props => [];

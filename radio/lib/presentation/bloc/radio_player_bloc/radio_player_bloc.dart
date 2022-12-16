@@ -17,29 +17,24 @@ class RadioPlayerBloc extends Bloc<RadioPlayerEvent, RadioPlayerState> {
     on<OnPlayRadio>((event, emit) async {
       emit(RadioPlayerLoading());
       final url = _prefs.getString(streamPref);
-      final result = await _playRadio.play(url);
-      result.fold(
-        (failure){
-          emit(RadioPlayerError(failure.message));
-        },
-        (data){
-          emit(RadioPlayerPlay());
-        },
-      );
+      try {
+        _playRadio.play(url);
+      } catch (e) {
+        emit(RadioPlayerError(e.toString()));
+      } finally {
+        emit(RadioPlayerPlay());
+      }
     });
 
     on<OnStopRadio>((event, emit) async {
       emit(RadioPlayerLoading());
-      final result = await _stopRadio.stop();
-      result.fold(
-            (failure){
-          emit(RadioPlayerError(failure.message));
-        },
-            (data){
-          emit(RadioPlayerStop());
-        },
-      );
+      try {
+        _stopRadio.stop();
+      } catch (e) {
+        emit(RadioPlayerError(e.toString()));
+      } finally {
+        emit(RadioPlayerStop());
+      }
     });
   }
-
 }

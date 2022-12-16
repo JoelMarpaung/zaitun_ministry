@@ -16,9 +16,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  static const List<Widget> _pages = <Widget>[
+  static final List<Widget> _pages = <Widget>[
     RadioPage(),
-    Scaffold(),
+    const Scaffold(),
   ];
   @override
   Widget build(BuildContext context) {
