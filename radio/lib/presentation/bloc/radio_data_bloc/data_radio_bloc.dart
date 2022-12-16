@@ -8,20 +8,18 @@ import 'data_radio_state.dart';
 
 class DataRadioBloc extends Bloc<RadioEvent, RadioState> {
   final GetDataRadio _dataRadio;
-  //final SharedPreferences prefs;
+  final SharedPreferences _prefs;
 
-  DataRadioBloc(this._dataRadio) : super(RadioEmpty()) {
+  DataRadioBloc(this._dataRadio, this._prefs) : super(RadioEmpty()) {
     on<OnFetchDataRadio>((event, emit) async {
       emit(RadioLoading());
       final result = await _dataRadio.execute();
       result.fold(
         (failure) async {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(streamPref, streamUrl);
+          await _prefs.setString(streamPref, streamUrl);
         },
         (data) async {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(streamPref, data.url);
+          await _prefs.setString(streamPref, data.url);
         },
       );
       emit(RadioComplete());
