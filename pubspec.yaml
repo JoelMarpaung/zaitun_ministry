@@ -46,6 +46,7 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   just_audio: ^0.9.30
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

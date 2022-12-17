@@ -27,28 +27,43 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: _selectedIndex == 1 ? Colors.blue[900] : Colors.blue[700],
         onPressed: () {
           _onItemTapped(1);
         },
         child: const Icon(Icons.radio),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
         child: Row(
-          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                _onItemTapped(0);
-              },
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                width: 70,
+                color: _selectedIndex == 0 ? Colors.blue[900] : Colors.transparent,
+                child: IconButton(
+                  icon: const Icon(Icons.home),
+                  color: Colors.white,
+                  onPressed: () {
+                    _onItemTapped(0);
+                  },
+                ),
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.school),
-              onPressed: () {
-                _onItemTapped(2);
-              },
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                width: 70,
+                color: _selectedIndex == 2 ? Colors.blue[900] : Colors.transparent,
+                child: IconButton(
+                  icon: const Icon(Icons.school),
+                  color: Colors.white,
+                  onPressed: () {
+                    _onItemTapped(2);
+                  },
+                ),
+              ),
             ),
           ],
         ),

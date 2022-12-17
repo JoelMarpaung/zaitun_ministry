@@ -31,7 +31,7 @@ class _RadioPageState extends State<RadioPage>
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     _animationControllers = List.generate( // Add this line
-      10, // Add this line
+      20, // Add this line
           (index) => AnimationController( // Add this line
         vsync: this, // Add this line
         duration: Duration(milliseconds: Random().nextInt(1000) + 1000), // Add this line
@@ -59,34 +59,39 @@ class _RadioPageState extends State<RadioPage>
             BlocBuilder<RadioPlayerBloc, RadioPlayerState>(
               bloc: radioPlayerBloc,
               builder: (context, state) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RotationTransition(
-                      turns: _animation,
-                      child: const Image(
-                        image: AssetImage('assets/icons/icon.png'),
-                        width: 250,
-                        height: 250,
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Radio Zaitun', style: Theme.of(context).textTheme.headline2,),
+                      Text('Suara Kebenaran', style: Theme.of(context).textTheme.headline2,),
+                      const SizedBox(height: 10,),
+                      Text('105.8 FM Balige', style: Theme.of(context).textTheme.headline3,),
+                      const SizedBox(height: 10,),
+                      RotationTransition(
+                        turns: _animation,
+                        child: const Image(
+                          image: AssetImage('assets/icons/icon.png'),
+                          width: 200,
+                          height: 200,
+                        ),
                       ),
-                    ),
-
-
-                    const SizedBox(height: 10,),
-                    _buildRadioPlayer(state),
-                    const SizedBox(height: 10,),
-                    SizedBox(
-                      height:100,
-                      child: Equalizer(
-                        animationControllers: _animationControllers,
-                        numBars: 10,
-                        barWidth: 15,
-                        barHeight: 100,
-                        barColor: Colors.black,
-                        animationDuration: const Duration(milliseconds: 500),
+                      const SizedBox(height: 10,),
+                      _buildRadioPlayer(state),
+                      const SizedBox(height: 10,),
+                      SizedBox(
+                        height:100,
+                        child: Equalizer(
+                          animationControllers: _animationControllers,
+                          numBars: 20,
+                          barWidth: 5,
+                          barHeight: 100,
+                          barColor: Colors.blue.shade900,
+                          animationDuration: const Duration(milliseconds: 500),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             ),
@@ -104,7 +109,9 @@ class _RadioPageState extends State<RadioPage>
       for (final controller in _animationControllers) { // Modify this line
         controller.stop();
       }
-        return ElevatedButton(
+        return IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           onPressed: () {
             _animationController.repeat();
             for (final controller in _animationControllers) { // Modify this line
@@ -112,14 +119,17 @@ class _RadioPageState extends State<RadioPage>
             }
             radioPlayerBloc.add(const OnPlayRadio());
           },
-          child: const Text('Play'),
+          iconSize: 100,
+          icon: Icon(Icons.play_circle, color: Colors.indigo.shade900,),
         );
       case RadioPlayerPlay:
         _animationController.repeat();
         for (final controller in _animationControllers) { // Modify this line
           controller.repeat(reverse: true);
         }
-        return ElevatedButton(
+        return IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           onPressed: () {
             _animationController.stop();
             for (final controller in _animationControllers) { // Modify this line
@@ -127,7 +137,8 @@ class _RadioPageState extends State<RadioPage>
             }
             radioPlayerBloc.add(const OnStopRadio());
           },
-          child: const Text('Stop'),
+          iconSize: 100,
+          icon: Icon(Icons.stop_circle, color: Colors.indigo.shade900,),
         );
       case RadioPlayerLoading:
         return const CircularProgressIndicator();

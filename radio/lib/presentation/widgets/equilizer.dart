@@ -30,7 +30,7 @@ class _EqualizerBarState extends State<EqualizerBar>
   @override
   void initState() {
     _curvedAnimation = CurvedAnimation(parent: widget.animationController, curve: Curves.easeInOutSine);
-    _animation = Tween<double>(begin: 50, end: 100).animate(_curvedAnimation);
+    _animation = Tween<double>(begin: 25, end: 80).animate(_curvedAnimation);
     super.initState();
   }
 
@@ -77,7 +77,7 @@ class Equalizer extends StatefulWidget {
 
 class _EqualizerState extends State<Equalizer>
     with TickerProviderStateMixin {
-  List colors = [Colors.red, Colors.green, Colors.yellow];
+  List colors = [Colors.blue, Colors.blueGrey, Colors.lightBlue, Colors.blueAccent, Colors.lightBlueAccent];
   Random random = Random();
   @override
   Widget build(BuildContext context) {
@@ -86,12 +86,12 @@ class _EqualizerState extends State<Equalizer>
       children: List.generate(
         widget.numBars,
             (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5.0),
               child: EqualizerBar(
           animationController: widget.animationControllers[index],
           width: widget.barWidth,
           height: widget.barHeight,
-          color: widget.barColor,
+          color: colors[random.nextInt(5)],
         ),
             ),
       ),
