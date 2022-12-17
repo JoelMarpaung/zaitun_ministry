@@ -213,7 +213,7 @@ class _CirclePainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.blue.shade800
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 8;
+      ..strokeWidth = 5;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = min(size.width, size.height) / 2;
 
