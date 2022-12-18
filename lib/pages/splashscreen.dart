@@ -35,13 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
           _goToHomepage();
         }
       },
-      child: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: FittedBox(
-          fit: BoxFit.cover,
-          child: Image.asset(
-            'assets/splashscreen.jpeg',
+      child: const Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Image(
+            image: AssetImage('assets/icons/icon_transparent.png'),
+            width: double.infinity
           ),
         ),
       ),

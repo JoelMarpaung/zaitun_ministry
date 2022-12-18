@@ -86,7 +86,7 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
                               RotationTransition(
                                 turns: _animation,
                                 child: const Image(
-                                  image: AssetImage('assets/icons/icon.png'),
+                                  image: AssetImage('assets/icons/icon_circle.png'),
                                   width: 180,
                                   height: 180,
                                 ),
@@ -254,9 +254,9 @@ class _CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white
+      ..color = Colors.brown.shade300
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 5;
+      ..strokeWidth = 3;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = min(size.width, size.height) / 2;
 
