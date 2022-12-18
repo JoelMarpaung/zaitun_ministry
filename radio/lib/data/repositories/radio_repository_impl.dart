@@ -7,7 +7,7 @@ import 'package:radio/data/datasources/radio_data_source.dart';
 import 'package:radio/domain/repositories/radio_repository.dart';
 import '../../domain/entities/radio.dart';
 
-class RadioRepositoryImpl implements RadioRepository{
+class RadioRepositoryImpl implements RadioRepository {
   final RadioDataSource radioDataSource;
 
   RadioRepositoryImpl({
@@ -15,7 +15,7 @@ class RadioRepositoryImpl implements RadioRepository{
   });
 
   @override
-  Future<Either<Failure, Radio>> getDataRadio() async{
+  Future<Either<Failure, Radio>> getDataRadio() async {
     try {
       final result = await radioDataSource.getDataRadio();
       return Right(result.toEntity());
@@ -27,31 +27,30 @@ class RadioRepositoryImpl implements RadioRepository{
   }
 
   @override
-  Future<Either<Failure, void>> playRadio(String url) async{
+  Future<Either<Failure, void>> playRadio(String url) async {
     // Catching errors at load time
     try {
       return Right(await radioDataSource.playRadio(url));
     } on PlayerException catch (e) {
-      return Left(ServerFailure(e.message??''));
+      return Left(ServerFailure(e.message ?? ''));
     } on PlayerInterruptedException catch (e) {
-      return Left(ServerFailure(e.message??''));
+      return Left(ServerFailure(e.message ?? ''));
     } catch (e) {
       return Left(ConnectionFailure(e.toString()));
     }
-
   }
 
   @override
-  Future<Either<Failure, void>> stopRadio() async{
+  Future<Either<Failure, void>> stopRadio() async {
     // Catching errors at load time
     try {
       return Right(await radioDataSource.stopRadio());
     } on PlayerException catch (e) {
-    return Left(ServerFailure(e.message??''));
+      return Left(ServerFailure(e.message ?? ''));
     } on PlayerInterruptedException catch (e) {
-    return Left(ServerFailure(e.message??''));
+      return Left(ServerFailure(e.message ?? ''));
     } catch (e) {
-    return Left(ConnectionFailure(e.toString()));
+      return Left(ConnectionFailure(e.toString()));
     }
   }
 }

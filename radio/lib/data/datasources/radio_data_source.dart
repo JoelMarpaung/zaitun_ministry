@@ -12,16 +12,15 @@ abstract class RadioDataSource {
   Future<void> stopRadio();
 }
 
-class RadioDataSourceImpl implements RadioDataSource{
+class RadioDataSourceImpl implements RadioDataSource {
   final http.Client client;
   final AudioPlayer audioPlayer;
   RadioDataSourceImpl({required this.client, required this.audioPlayer});
   var _isUrlSet = false;
 
   @override
-  Future<RadioModel> getDataRadio() async{
-    final response = await client
-        .get(Uri.parse(githubUrl + radioUrl));
+  Future<RadioModel> getDataRadio() async {
+    final response = await client.get(Uri.parse(githubUrl + radioUrl));
     if (response.statusCode == 200) {
       return RadioModel.fromJson(json.decode(response.body));
     } else {
@@ -30,7 +29,7 @@ class RadioDataSourceImpl implements RadioDataSource{
   }
 
   @override
-  Future<void> playRadio(String url) async{
+  Future<void> playRadio(String url) async {
     if (!_isUrlSet) {
       await audioPlayer.setUrl(url);
       _isUrlSet = true;
@@ -39,8 +38,7 @@ class RadioDataSourceImpl implements RadioDataSource{
   }
 
   @override
-  Future<void> stopRadio() async{
+  Future<void> stopRadio() async {
     return await audioPlayer.stop();
   }
-
 }

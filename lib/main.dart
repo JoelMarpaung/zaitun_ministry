@@ -8,9 +8,8 @@ import 'package:zaitun_ministry/pages/homepage.dart';
 import 'package:zaitun_ministry/pages/splashscreen.dart';
 import 'package:core/common/utils.dart';
 import 'package:core/common/light_theme.dart';
-import 'package:core/common/dark_theme.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(const MyApp());
@@ -30,6 +29,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: lightThemeData,
         title: 'Radio Zaitun Ministry',
         home: const HomePage(), //SplashScreen(),

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Radio extends Equatable{
+class Radio extends Equatable {
   final String url;
 
   const Radio({required this.url});

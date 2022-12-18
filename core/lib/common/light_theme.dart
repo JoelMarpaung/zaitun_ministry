@@ -41,44 +41,44 @@ final ThemeData lightThemeData = ThemeData(
     foregroundColor: Colors.white,
   ),
   textTheme: TextTheme(
-    headline1: TextStyle(
+    headline1: const TextStyle(
         fontSize: 72.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.black),
-    headline2: GoogleFonts.getFont('Roboto', color: Colors.black, fontSize: 30),
-    headline3: TextStyle(
+    headline2: GoogleFonts.righteous(fontSize: 30, color: Colors.white),
+    headline3: const TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
-        color: Colors.black),
-    headline4: TextStyle(
+        color: Colors.white),
+    headline4: const TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.black),
-    headline5: TextStyle(
+    headline5: const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.black),
-    headline6: TextStyle(
+    headline6: const TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.black),
-    subtitle1:
-        TextStyle(fontSize: 16.0, color: Colors.black, fontFamily: 'Roboto'),
-    subtitle2:
-        TextStyle(fontSize: 14.0, color: Colors.black, fontFamily: 'Roboto'),
-    bodyText1: TextStyle(fontSize: 16.0, fontFamily: 'Roboto'),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Roboto'),
-    caption:
-        TextStyle(fontSize: 12.0, color: Colors.black, fontFamily: 'Roboto'),
-    button:
-        TextStyle(fontSize: 14.0, color: Colors.white, fontFamily: 'Roboto'),
-    overline:
-        TextStyle(fontSize: 12.0, color: Colors.black, fontFamily: 'Roboto'),
+    subtitle1: const TextStyle(
+        fontSize: 16.0, color: Colors.black, fontFamily: 'Roboto'),
+    subtitle2: const TextStyle(
+        fontSize: 14.0, color: Colors.black, fontFamily: 'Roboto'),
+    bodyText1: const TextStyle(fontSize: 16.0, fontFamily: 'Roboto'),
+    bodyText2: const TextStyle(fontSize: 14.0, fontFamily: 'Roboto'),
+    caption: const TextStyle(
+        fontSize: 12.0, color: Colors.black, fontFamily: 'Roboto'),
+    button: const TextStyle(
+        fontSize: 14.0, color: Colors.white, fontFamily: 'Roboto'),
+    overline: const TextStyle(
+        fontSize: 12.0, color: Colors.black, fontFamily: 'Roboto'),
   ),
   colorScheme:
       ColorScheme.fromSwatch().copyWith(secondary: Colors.lightBlue[50]),

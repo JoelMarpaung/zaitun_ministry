@@ -6,7 +6,7 @@ class PlayRadio {
   final RadioRepository repository;
   PlayRadio(this.repository);
 
-  Future<Either<Failure, void>> play(url){
+  Future<Either<Failure, void>> play(url) {
     return repository.playRadio(url);
   }
 }

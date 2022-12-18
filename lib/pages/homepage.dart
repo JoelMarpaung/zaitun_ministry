@@ -27,7 +27,8 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _selectedIndex == 1 ? Colors.blue[900] : Colors.blue[700],
+        backgroundColor:
+            _selectedIndex == 1 ? Colors.blue[900] : Colors.blue[700],
         onPressed: () {
           _onItemTapped(1);
         },
@@ -41,9 +42,10 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 width: 70,
-                color: _selectedIndex == 0 ? Colors.blue[900] : Colors.transparent,
+                color:
+                    _selectedIndex == 0 ? Colors.blue[900] : Colors.transparent,
                 child: IconButton(
-                  icon: const Icon(Icons.home),
+                  icon: const Icon(Icons.schedule),
                   color: Colors.white,
                   onPressed: () {
                     _onItemTapped(0);
@@ -55,9 +57,10 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 width: 70,
-                color: _selectedIndex == 2 ? Colors.blue[900] : Colors.transparent,
+                color:
+                    _selectedIndex == 2 ? Colors.blue[900] : Colors.transparent,
                 child: IconButton(
-                  icon: const Icon(Icons.school),
+                  icon: const Icon(Icons.info_outline),
                   color: Colors.white,
                   onPressed: () {
                     _onItemTapped(2);
@@ -71,4 +74,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

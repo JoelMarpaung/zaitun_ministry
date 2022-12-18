@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_bloc.dart';
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_event.dart';
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_state.dart';
-
 import '../widgets/equilizer.dart';
+import 'package:animated_background/animated_background.dart';
 
 class RadioPage extends StatefulWidget {
   const RadioPage({super.key});
@@ -20,6 +22,7 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   late List<AnimationController> _animationControllers;
+  late AnimationController _animationController2;
 
   @override
   void initState() {
@@ -39,12 +42,17 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
             milliseconds: Random().nextInt(1000) + 1000), // Add this line
       ), // Add this line
     ); // A
+
+    _animationController2 =
+        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    _animationController2.repeat();
     super.initState();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _animationController2.dispose();
     for (final controller in _animationControllers) {
       // Add this line
       controller.dispose(); // Add this line
@@ -54,82 +62,117 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocBuilder<RadioPlayerBloc, RadioPlayerState>(
-              bloc: radioPlayerBloc,
-              builder: (context, state) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Radio Zaitun',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                      Text(
-                        'Suara Kebenaran',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        '105.8 FM Balige',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Stack(
+    return Stack(
+      children: [
+        AnimatedBackground(
+          behaviour: RectanglesBehaviour(),
+          vsync: this,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BlocBuilder<RadioPlayerBloc, RadioPlayerState>(
+                  bloc: radioPlayerBloc,
+                  builder: (context, state) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RotationTransition(
-                            turns: _animation,
-                            child: const Image(
-                              image: AssetImage('assets/icons/icon.png'),
-                              width: 200,
-                              height: 200,
-                            ),
+                          const SizedBox(
+                            height: 170,
                           ),
-                          // Add the CustomPaint widget here
-                          CustomPaint(
-                            painter: _CirclePainter(
-                              animation:
-                                  _animation, // Use the same animation here
+                          Stack(
+                            children: [
+                              RotationTransition(
+                                turns: _animation,
+                                child: const Image(
+                                  image: AssetImage('assets/icons/icon.png'),
+                                  width: 180,
+                                  height: 180,
+                                ),
+                              ),
+                              // Add the CustomPaint widget here
+                              CustomPaint(
+                                painter: _CirclePainter(
+                                  animation:
+                                      _animation, // Use the same animation here
+                                ),
+                                size: const Size(180, 180),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _buildRadioPlayer(state),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 80,
+                            child: Equalizer(
+                              animationControllers: _animationControllers,
+                              numBars: 20,
+                              barWidth: 5,
+                              barHeight: 100,
+                              barColor: Colors.blue.shade900,
+                              animationDuration:
+                                  const Duration(milliseconds: 500),
                             ),
-                            size: const Size(200, 200),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      _buildRadioPlayer(state),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 100,
-                        child: Equalizer(
-                          animationControllers: _animationControllers,
-                          numBars: 20,
-                          barWidth: 5,
-                          barHeight: 100,
-                          barColor: Colors.blue.shade900,
-                          animationDuration: const Duration(milliseconds: 500),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 170,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.lightBlue.shade900.withOpacity(0.9),
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(60),
+                  bottomRight: Radius.circular(60)),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0), //(x,y)
+                  blurRadius: 50.0,
+                ),
+              ],
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Radio Zaitun',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  Text(
+                    'Suara Kebenaran',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    '105.8 FM Balige',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -211,20 +254,23 @@ class _CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue.shade800
+      ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 5;
+      ..strokeWidth = 15;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = min(size.width, size.height) / 2;
 
     final path = Path();
-    final startAngle = -animation.value * 2 * pi; // Use the negative value of the animation here
+    final startAngle = -animation.value *
+        2 *
+        pi; // Use the negative value of the animation here
     const arcAngle = 2 * pi;
 
     // // Add a loop here
     for (double i = startAngle; i < startAngle + arcAngle; i += pi / 10) {
       path.moveTo(center.dx + radius * cos(i), center.dy + radius * sin(i));
-      path.lineTo(center.dx + radius * cos(i + pi / 5), center.dy + radius * sin(i + pi / 5));
+      path.lineTo(center.dx + radius * cos(i + pi / 5),
+          center.dy + radius * sin(i + pi / 5));
     }
 
     canvas.drawPath(path, paint);

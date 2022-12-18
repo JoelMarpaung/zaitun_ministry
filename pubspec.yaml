@@ -47,6 +47,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   just_audio: ^0.9.30
   google_fonts: ^3.0.1
+  animated_background: ^2.0.0
 
 dev_dependencies:
   flutter_test:

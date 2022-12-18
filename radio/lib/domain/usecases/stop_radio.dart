@@ -6,7 +6,7 @@ class StopRadio {
   final RadioRepository repository;
   StopRadio(this.repository);
 
-  Future<Either<Failure, void>> stop(){
+  Future<Either<Failure, void>> stop() {
     return repository.stopRadio();
   }
 }

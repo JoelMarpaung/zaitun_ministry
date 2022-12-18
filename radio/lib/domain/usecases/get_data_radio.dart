@@ -8,8 +8,7 @@ class GetDataRadio {
   final RadioRepository repository;
   GetDataRadio(this.repository);
 
-  Future<Either<Failure, Radio>> execute(){
+  Future<Either<Failure, Radio>> execute() {
     return repository.getDataRadio();
   }
-
 }

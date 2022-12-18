@@ -14,7 +14,7 @@ class RadioPlayerBloc extends Bloc<RadioPlayerEvent, RadioPlayerState> {
 
   RadioPlayerBloc(this._playRadio, this._stopRadio, this._prefs)
       : super(RadioPlayerEmpty()) {
-    on<OnPlayRadio>((event, emit)  {
+    on<OnPlayRadio>((event, emit) {
       emit(RadioPlayerLoading());
       final url = _prefs.getString(streamPref);
       try {
@@ -28,7 +28,7 @@ class RadioPlayerBloc extends Bloc<RadioPlayerEvent, RadioPlayerState> {
 
     on<OnStopRadio>((event, emit) {
       emit(RadioPlayerLoading());
-      try{
+      try {
         _stopRadio.stop();
       } catch (e) {
         emit(RadioPlayerError(e.toString()));

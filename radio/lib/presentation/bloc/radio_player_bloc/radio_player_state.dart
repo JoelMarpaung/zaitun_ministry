@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 abstract class RadioPlayerState extends Equatable {
   const RadioPlayerState();
 

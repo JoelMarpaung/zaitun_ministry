@@ -1,6 +1,7 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:math';
 
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 // This class represents a single bar in the equalizer visualization.
@@ -29,7 +30,8 @@ class _EqualizerBarState extends State<EqualizerBar>
 
   @override
   void initState() {
-    _curvedAnimation = CurvedAnimation(parent: widget.animationController, curve: Curves.easeInOutSine);
+    _curvedAnimation = CurvedAnimation(
+        parent: widget.animationController, curve: Curves.easeInOutSine);
     _animation = Tween<double>(begin: 25, end: 80).animate(_curvedAnimation);
     super.initState();
   }
@@ -75,9 +77,14 @@ class Equalizer extends StatefulWidget {
   _EqualizerState createState() => _EqualizerState();
 }
 
-class _EqualizerState extends State<Equalizer>
-    with TickerProviderStateMixin {
-  List colors = [Colors.blue, Colors.blueGrey, Colors.lightBlue, Colors.blueAccent, Colors.lightBlueAccent];
+class _EqualizerState extends State<Equalizer> with TickerProviderStateMixin {
+  List colors = [
+    Colors.blue,
+    Colors.blueGrey,
+    Colors.lightBlue,
+    Colors.blueAccent,
+    Colors.lightBlueAccent
+  ];
   Random random = Random();
   @override
   Widget build(BuildContext context) {
@@ -85,15 +92,15 @@ class _EqualizerState extends State<Equalizer>
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         widget.numBars,
-            (index) => Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: EqualizerBar(
-          animationController: widget.animationControllers[index],
-          width: widget.barWidth,
-          height: widget.barHeight,
-          color: colors[random.nextInt(5)],
+        (index) => Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: EqualizerBar(
+            animationController: widget.animationControllers[index],
+            width: widget.barWidth,
+            height: widget.barHeight,
+            color: colors[random.nextInt(5)],
+          ),
         ),
-            ),
       ),
     );
   }
