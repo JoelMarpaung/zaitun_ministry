@@ -254,9 +254,9 @@ class _CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 15;
+      ..strokeWidth = 5;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = min(size.width, size.height) / 2;
 
