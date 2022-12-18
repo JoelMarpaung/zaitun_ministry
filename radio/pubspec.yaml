@@ -24,6 +24,7 @@ dependencies:
   path: ^1.8.2
   animated_background: ^2.0.0
   google_fonts: ^3.0.1
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

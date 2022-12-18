@@ -48,6 +48,7 @@ dependencies:
   just_audio: ^0.9.30
   google_fonts: ^3.0.1
   animated_background: ^2.0.0
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_event.dar
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_state.dart';
 import '../widgets/equilizer.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class RadioPage extends StatefulWidget {
   const RadioPage({super.key});
@@ -188,13 +190,29 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
         return IconButton(
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
-          onPressed: () {
-            _animationController.repeat();
-            for (final controller in _animationControllers) {
-              // Modify this line
-              controller.repeat(reverse: true);
+          onPressed: () async{
+            final isConnected = await Connectivity().checkConnectivity();
+            if (isConnected.index == 1) {
+              _animationController.repeat();
+              for (final controller in _animationControllers) {
+                controller.repeat(reverse: true);
+              }
+              radioPlayerBloc.add(const OnPlayRadio());
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => CupertinoAlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('No internet connection'),
+                  actions: [
+                    CupertinoDialogAction(
+                      child: const Text('Close'),
+                      onPressed: () => Navigator.of(context).pop(true),
+                    ),
+                  ],
+                ),
+              );
             }
-            radioPlayerBloc.add(const OnPlayRadio());
           },
           iconSize: 100,
           icon: Icon(
@@ -228,13 +246,13 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
       case RadioPlayerLoading:
         return const CircularProgressIndicator();
       case RadioPlayerError:
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('Error'),
           content: Text((state as RadioPlayerError).message),
           actions: [
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(),
+            CupertinoDialogAction(
               child: const Text('Close'),
+              onPressed: () => Navigator.of(context).pop(true),
             ),
           ],
         );
