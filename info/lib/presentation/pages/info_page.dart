@@ -20,6 +20,7 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
+  int year = DateTime.now().year;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InfoDataBloc, InfoState>(
@@ -173,10 +174,46 @@ class _InfoPageState extends State<InfoPage> {
                 children: data.socialMedia
                     .map((model) => SocialMediaTile(model: model))
                     .toList(),
-              )
+              ),
+              Divider(thickness: 1, color: Colors.brown.shade400,),
+              _license(),
+              const SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _license() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: <Widget>[
+          const Center(
+            child: Text(
+                "Zaitun radio mobile application is designed and developed by Zaitun application developers.\n"),
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Text("Copyright \u00a9"),
+                Text(" $year"),
+                const Text(" Radio Zaitun."),
+                const Text(" All rights reserved.")
+              ],
+            ),
+          ),
+
+          const Text('\nApp. version 2.0.0'),
+          const Padding(
+            padding: EdgeInsets.only(top: 5.0),
+          ),
+        ],
       ),
     );
   }

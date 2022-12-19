@@ -29,48 +29,41 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor:
-            _selectedIndex == 1 ? Colors.blue[900] : Colors.blue[700],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          side: BorderSide(
+            color: Colors.brown.shade400,
+            width: 2.0,
+          ),
+        ),
+        backgroundColor: Colors.white,
         onPressed: () {
           _onItemTapped(1);
         },
-        child: const Icon(Icons.radio),
+        child: Icon(Icons.radio, color: _selectedIndex == 1 ? Colors.blue[900] : Colors.brown[400]),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                width: 70,
-                color:
-                    _selectedIndex == 0 ? Colors.blue[900] : Colors.transparent,
-                child: IconButton(
-                  icon: const Icon(Icons.event_note),
-                  color: Colors.white,
-                  onPressed: () {
-                    _onItemTapped(0);
-                  },
-                ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.brown.shade400, width: 2))),
+        child: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.event_note),
+                color: _selectedIndex == 0 ? Colors.blue[900] : Colors.brown[400],
+                onPressed: () {
+                  _onItemTapped(0);
+                },
               ),
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                width: 70,
-                color:
-                    _selectedIndex == 2 ? Colors.blue[900] : Colors.transparent,
-                child: IconButton(
-                  icon: const Icon(Icons.info_outline),
-                  color: Colors.white,
-                  onPressed: () {
-                    _onItemTapped(2);
-                  },
-                ),
+              IconButton(
+                icon: const Icon(Icons.info_outline),
+                color: _selectedIndex == 2 ? Colors.blue[900] : Colors.brown[400],
+                onPressed: () {
+                  _onItemTapped(2);
+                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

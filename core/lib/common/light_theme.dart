@@ -17,9 +17,9 @@ final ThemeData lightThemeData = ThemeData(
       borderRadius: BorderRadius.circular(20.0),
     ),
   ),
-  bottomAppBarTheme: BottomAppBarTheme(
-    color: Colors.blue[700],
-    shape: const CircularNotchedRectangle(),
+  bottomAppBarTheme: const BottomAppBarTheme(
+    color: Colors.white,
+    shape: CircularNotchedRectangle(),
     elevation: 50.0,
   ),
   toggleButtonsTheme: ToggleButtonsThemeData(

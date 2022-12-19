@@ -2,7 +2,7 @@
     package="com.zaitunministry.zaitun_ministry.zaitun_ministry">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="zaitun_ministry"
+        android:label="Radio Zaitun Suara Kebenaran"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
