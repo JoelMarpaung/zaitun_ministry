@@ -37,6 +37,8 @@ dependencies:
     path: radio
   schedule:
     path: schedule
+  info:
+    path: info
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -52,6 +54,7 @@ dependencies:
   animated_background: ^2.0.0
   connectivity_plus: ^3.0.2
   shimmer: ^2.0.0
+  font_awesome_flutter: ^10.3.0
 
 dev_dependencies:
   flutter_test:

@@ -8,7 +8,7 @@ class EventModel extends Equatable {
   final String name;
   final List<String> presenters;
 
-  EventModel({required this.startTime, required this.endTime, required this.name, required this.presenters});
+  const EventModel({required this.startTime, required this.endTime, required this.name, required this.presenters});
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(

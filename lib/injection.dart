@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:info/data/datasources/info_data_source.dart';
+import 'package:info/data/repositories/info_repository_impl.dart';
+import 'package:info/domain/repositories/info_repository.dart';
+import 'package:info/domain/usecases/get_data_info.dart';
+import 'package:info/presentation/bloc/info_data_bloc/info_data_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:radio/data/datasources/radio_data_source.dart';
 import 'package:radio/data/repositories/radio_repository_impl.dart';
@@ -36,30 +41,39 @@ Future<void> init() async {
   );
 
   locator.registerFactory(
-        () => ScheduleDataBloc(
+    () => ScheduleDataBloc(
       locator(),
     ),
   );
 
+  locator.registerFactory(
+    () => InfoDataBloc(
+      locator(),
+    ),
+  );
 
   //usecases
   locator.registerLazySingleton(() => GetDataRadio(locator()));
   locator.registerLazySingleton(() => PlayRadio(locator()));
   locator.registerLazySingleton(() => StopRadio(locator()));
   locator.registerLazySingleton(() => GetDataSchedule(locator()));
+  locator.registerLazySingleton(() => GetDataInfo(locator()));
 
   //repository
   locator.registerLazySingleton<RadioRepository>(
       () => RadioRepositoryImpl(radioDataSource: locator()));
   locator.registerLazySingleton<ScheduleRepository>(
-          () => ScheduleRepositoryImpl(scheduleDataSource: locator()));
+      () => ScheduleRepositoryImpl(scheduleDataSource: locator()));
+  locator.registerLazySingleton<InfoRepository>(
+      () => InfoRepositoryImpl(infoDataSource: locator()));
 
   //datasource
   locator.registerLazySingleton<RadioDataSource>(
       () => RadioDataSourceImpl(client: locator(), audioPlayer: locator()));
-
   locator.registerLazySingleton<ScheduleDataSource>(
-          () => ScheduleDataSourceImpl(client: locator()));
+      () => ScheduleDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<InfoDataSource>(
+      () => InfoDataSourceImpl(client: locator()));
 
   //client http
   locator.registerLazySingleton(() => http.Client());

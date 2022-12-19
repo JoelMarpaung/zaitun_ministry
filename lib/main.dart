@@ -1,6 +1,7 @@
 import 'package:core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:info/presentation/bloc/info_data_bloc/info_data_bloc.dart';
 import 'package:radio/presentation/bloc/radio_data_bloc/data_radio_bloc.dart';
 import 'package:radio/presentation/bloc/radio_player_bloc/radio_player_bloc.dart';
 import 'package:schedule/presentation/bloc/schedule_data_bloc/schedule_data_bloc.dart';
@@ -31,12 +32,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<ScheduleDataBloc>(),
         ),
+        BlocProvider(
+          create: (_) => di.locator<InfoDataBloc>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightThemeData,
         title: 'Radio Zaitun Ministry',
-        home: const HomePage(),//SplashScreen(),
+        home: const SplashScreen(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

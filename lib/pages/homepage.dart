@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radio/presentation/pages/radio_page.dart';
 import 'package:schedule/presentation/pages/schedule_page.dart';
+import 'package:info/presentation/pages/info_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,9 +19,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    SchedulePage(),
+    const SchedulePage(),
     const RadioPage(),
-    const Scaffold(),
+    const InfoPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 color:
                     _selectedIndex == 0 ? Colors.blue[900] : Colors.transparent,
                 child: IconButton(
-                  icon: const Icon(Icons.schedule),
+                  icon: const Icon(Icons.event_note),
                   color: Colors.white,
                   onPressed: () {
                     _onItemTapped(0);

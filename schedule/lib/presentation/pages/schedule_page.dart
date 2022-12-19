@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/domain/entities/event.dart';
@@ -7,6 +9,8 @@ import '../bloc/schedule_data_bloc/schedule_data_event.dart';
 import '../bloc/schedule_data_bloc/schedule_data_state.dart';
 
 class SchedulePage extends StatefulWidget {
+  const SchedulePage({super.key});
+
   @override
   _SchedulePageState createState() => _SchedulePageState();
 }
@@ -21,7 +25,7 @@ class _SchedulePageState extends State<SchedulePage> {
               .add(const OnFetchDataSchedule());
           return Stack(
             children: [
-              Center(
+              const Center(
                 child: CircularProgressIndicator(),
               ),
               topTitle()
@@ -30,7 +34,7 @@ class _SchedulePageState extends State<SchedulePage> {
         } else if (state is ScheduleLoading) {
           return Stack(
             children: [
-              Center(
+              const Center(
                 child: CircularProgressIndicator(),
               ),
               topTitle()
@@ -111,51 +115,57 @@ class _SchedulePageState extends State<SchedulePage> {
           List<Event>? events = data.events[key];
           return Column(
             children: [
-              ExpansionTile(
-                backgroundColor: Colors.blue.shade700,
-                textColor: Colors.white,
-                iconColor: Colors.white,
-                collapsedIconColor: Colors.white,
-                collapsedBackgroundColor: Colors.blue.shade700,
-                title: Text(
-                  key[0].toUpperCase() + key.substring(1),
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: ExpansionTile(
+                    backgroundColor: Colors.blue.shade700,
+                    textColor: Colors.white,
+                    iconColor: Colors.white,
+                    collapsedIconColor: Colors.white,
+                    collapsedBackgroundColor: Colors.blue.shade700,
+                    title: Text(
+                      key[0].toUpperCase() + key.substring(1),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    children: events!.map((event) {
+                      return Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Card(
+                          color: Colors.white, // set white background color
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          elevation: 4,
+                          child: ListTile(
+                            title: Text(
+                              event.name,
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              '${event.startTime} - ${event.endTime}',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            trailing: Text(event.presenters.join(', ')),
+                            contentPadding: const EdgeInsets.all(
+                                15), // add padding inside the card
+                            dense: true, // make the card act like a ListTile
+                          ), // add a small shadow
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
-                children: events!.map((event) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Card(
-                      color: Colors.white, // set white background color
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      elevation: 4,
-                      child: ListTile(
-                        title: Text(
-                          event.name,
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        subtitle: Text(
-                          '${event.startTime} - ${event.endTime}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Text(event.presenters.join(', ')),
-                        contentPadding: const EdgeInsets.all(
-                            15), // add padding inside the card
-                        dense: true, // make the card act like a ListTile
-                      ), // add a small shadow
-                    ),
-                  );
-                }).toList(),
               ),
               const Divider(
                   color: Colors.blue,
                   thickness: 3,
-                  indent: 5,
-                  endIndent: 5,
-                  height: 15), // add a divider between each expanded tile
+                  indent: 10,
+                  endIndent: 10,
+                  height: 5), // add a divider between each expanded tile
             ],
           );
         },

@@ -5,7 +5,7 @@ class Event extends Equatable {
   final String name;
   final List<String> presenters;
 
-  Event({required this.startTime, required this.endTime, required this.name, required this.presenters});
+  const Event({required this.startTime, required this.endTime, required this.name, required this.presenters});
 
   @override
   List<Object> get props => [startTime, endTime, name, presenters];

@@ -6,7 +6,7 @@ import 'event_model.dart';
 class ScheduleModel extends Equatable {
   final Map<String, List<EventModel>> events;
 
-  ScheduleModel({required this.events});
+  const ScheduleModel({required this.events});
 
   factory ScheduleModel.fromJson(Map<String, dynamic> json) {
     Map<String, List<EventModel>> events = {};
