@@ -45,9 +45,9 @@ final ThemeData lightThemeData = ThemeData(
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.black),
-    headline2: GoogleFonts.righteous(fontSize: 30, color: Colors.white),
+    headline2: GoogleFonts.righteous(fontSize: 27, color: Colors.white),
     headline3: const TextStyle(
-        fontSize: 24.0,
+        fontSize: 23.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Roboto',
         color: Colors.white),

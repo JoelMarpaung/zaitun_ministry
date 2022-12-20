@@ -1,16 +1,16 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:core/constants/enums.dart';
+import 'package:core/widgets/top_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:info/domain/entities/info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../domain/entities/social_media.dart';
 import '../bloc/info_data_bloc/info_data_bloc.dart';
 import '../bloc/info_data_bloc/info_data_event.dart';
 import '../bloc/info_data_bloc/info_data_state.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../widgets/social_media_tile.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -28,20 +28,28 @@ class _InfoPageState extends State<InfoPage> {
         if (state is InfoEmpty) {
           BlocProvider.of<InfoDataBloc>(context).add(const OnFetchDataInfo());
           return Stack(
-            children: [
-              const Center(
+            children: const [
+              Center(
                 child: CircularProgressIndicator(),
               ),
-              topTitle()
+              TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Info Radio',
+              )
             ],
           );
         } else if (state is InfoLoading) {
           return Stack(
-            children: [
-              const Center(
+            children: const [
+              Center(
                 child: CircularProgressIndicator(),
               ),
-              topTitle()
+              TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Info Radio',
+              )
             ],
           );
         } else if (state is InfoError) {
@@ -50,58 +58,31 @@ class _InfoPageState extends State<InfoPage> {
               Center(
                 child: Text(state.message),
               ),
-              topTitle()
+              const TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Info Radio',
+              )
             ],
           );
         } else if (state is InfoHasData) {
           return Stack(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 120),
+                padding: const EdgeInsets.only(top: 100),
                 child: buildIListInfo(state.result),
               ),
-              topTitle()
+              const TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Info Radio',
+              )
             ],
           );
         } else {
           return Container();
         }
       },
-    );
-  }
-
-  Widget topTitle() {
-    return Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 100,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.lightBlue.shade900.withOpacity(0.9),
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(60),
-              bottomRight: Radius.circular(60)),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-              offset: Offset(1.0, 1.0), //(x,y)
-              blurRadius: 30.0,
-            ),
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Info Radio',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -122,7 +103,7 @@ class _InfoPageState extends State<InfoPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Colors.blue.shade700,
+                color: Colors.blue.shade800,
                 elevation: 10,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -130,23 +111,22 @@ class _InfoPageState extends State<InfoPage> {
                     children: [
                       Text(data.address,
                           style: GoogleFonts.roboto(
-                              fontSize: 20, color: Colors.white)),
+                              fontSize: 17, color: Colors.white)),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(data.description,
                           style: GoogleFonts.roboto(
-                              fontSize: 20, color: Colors.white)),
+                              fontSize: 17, color: Colors.white)),
                       const SizedBox(
                         height: 10,
                       ),
                       ElevatedButton.icon(
                         onPressed: () async {
-                          final latitude = data.latitude;
-                          final longitude = data.longitude;
-                          final Uri url = Uri.parse(
-                              'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
-                          if (!await launchUrl(url)) {
+                          final googleMap = data.googleMap;
+                          final Uri url = Uri.parse(googleMap);
+                          if (!await launchUrl(url,
+                              mode: LaunchMode.externalApplication)) {
                             throw 'Could not launch $url';
                           }
                         },
@@ -175,7 +155,10 @@ class _InfoPageState extends State<InfoPage> {
                     .map((model) => SocialMediaTile(model: model))
                     .toList(),
               ),
-              Divider(thickness: 1, color: Colors.brown.shade400,),
+              Divider(
+                thickness: 1,
+                color: Colors.brown.shade400,
+              ),
               _license(),
               const SizedBox(
                 height: 15,
@@ -191,89 +174,27 @@ class _InfoPageState extends State<InfoPage> {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const Center(
-            child: Text(
-                "Zaitun radio mobile application is designed and developed by Zaitun application developers.\n"),
+          const Text(
+              "Zaitun radio mobile application is designed and developed by Zaitun application developers.\n"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Text("Copyright \u00a9"),
+              Text(" $year"),
+              const Text(" Radio Zaitun."),
+              const Text(" All rights reserved.")
+            ],
           ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Text("Copyright \u00a9"),
-                Text(" $year"),
-                const Text(" Radio Zaitun."),
-                const Text(" All rights reserved.")
-              ],
-            ),
-          ),
-
           const Text('\nApp. version 2.0.0'),
-          const Padding(
-            padding: EdgeInsets.only(top: 5.0),
-          ),
+          const SizedBox(
+            height: 5,
+          )
         ],
       ),
     );
-  }
-}
-
-class SocialMediaTile extends StatelessWidget {
-  final SocialMedia model;
-
-  const SocialMediaTile({super.key, required this.model});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        final Uri url = Uri.parse(model.url);
-        if (!await launchUrl(url)) {
-          throw 'Could not launch $url';
-        }
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        elevation: 10,
-        color: Colors.lightBlue.shade900,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              _getIcon(model.type),
-              size: 50,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              model.title,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                  fontSize: 15,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  IconData _getIcon(SocialMediaType type) {
-    switch (type) {
-      case SocialMediaType.youtube:
-        return FontAwesomeIcons.youtube;
-      case SocialMediaType.facebook:
-        return FontAwesomeIcons.facebook;
-      case SocialMediaType.instagram:
-        return FontAwesomeIcons.instagram;
-      default:
-        throw Exception('Invalid social media type');
-    }
   }
 }

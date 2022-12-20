@@ -6,10 +6,11 @@ class Info extends Equatable {
   final String description;
   final String latitude;
   final String longitude;
+  final String googleMap;
   final List<SocialMedia> socialMedia;
 
-  const Info({required this.address, required this.description, required this.latitude, required this.longitude, required this.socialMedia});
+  const Info({required this.address, required this.description, required this.latitude, required this.longitude, required this.googleMap, required this.socialMedia});
 
   @override
-  List<Object> get props => [address, description, latitude, longitude, socialMedia];
+  List<Object> get props => [address, description, latitude, longitude, googleMap, socialMedia];
 }

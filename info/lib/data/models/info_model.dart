@@ -8,9 +8,10 @@ class InfoModel extends Equatable {
   final String description;
   final String latitude;
   final String longitude;
+  final String googleMap;
   final List<SocialMediaModel> socialMedia;
 
-  const InfoModel({required this.address, required this.description, required this.latitude, required this.longitude, required this.socialMedia});
+  const InfoModel({required this.address, required this.description, required this.latitude, required this.longitude, required this.googleMap, required this.socialMedia});
 
   factory InfoModel.fromJson(Map<String, dynamic> json) {
     return InfoModel(
@@ -18,6 +19,7 @@ class InfoModel extends Equatable {
       description: json['deskripsi'],
       latitude: json['latitude_map'],
       longitude: json['longitude_map'],
+      googleMap: json['google_map'],
       socialMedia: List<SocialMediaModel>.from(json['social_media'].map((x) => SocialMediaModel.fromJson(x))),
     );
   }
@@ -28,10 +30,11 @@ class InfoModel extends Equatable {
       description: description,
       latitude: latitude,
       longitude: longitude,
+      googleMap: googleMap,
       socialMedia: socialMedia.map((x) => x.toEntity()).toList(),
     );
   }
 
   @override
-  List<Object> get props => [address, description, latitude, longitude, socialMedia];
+  List<Object> get props => [address, description, latitude, longitude, googleMap, socialMedia];
 }

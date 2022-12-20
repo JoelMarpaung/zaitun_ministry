@@ -66,76 +66,83 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AnimatedBackground(
-          behaviour: RectanglesBehaviour(),
-          vsync: this,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BlocBuilder<RadioPlayerBloc, RadioPlayerState>(
-                  bloc: radioPlayerBloc,
-                  builder: (context, state) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 170,
-                          ),
-                          Stack(
-                            children: [
-                              RotationTransition(
-                                turns: _animation,
-                                child: const Image(
-                                  image: AssetImage('assets/icons/icon_circle.png'),
-                                  width: 180,
-                                  height: 180,
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return AnimatedBackground(
+              behaviour: RectanglesBehaviour(),
+              vsync: this,
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      BlocBuilder<RadioPlayerBloc, RadioPlayerState>(
+                        bloc: radioPlayerBloc,
+                        builder: (context, state) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                  height: 150,
                                 ),
-                              ),
-                              // Add the CustomPaint widget here
-                              CustomPaint(
-                                painter: _CirclePainter(
-                                  animation:
-                                      _animation, // Use the same animation here
+                                Stack(
+                                  children: [
+                                    RotationTransition(
+                                      turns: _animation,
+                                      child: const Image(
+                                        image: AssetImage(
+                                            'assets/icons/icon_circle.png'),
+                                        width: 180,
+                                        height: 180,
+                                      ),
+                                    ),
+                                    // Add the CustomPaint widget here
+                                    CustomPaint(
+                                      painter: _CirclePainter(
+                                        animation:
+                                            _animation, // Use the same animation here
+                                      ),
+                                      size: const Size(180, 180),
+                                    ),
+                                  ],
                                 ),
-                                size: const Size(180, 180),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          _buildRadioPlayer(state),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 80,
-                            child: Equalizer(
-                              animationControllers: _animationControllers,
-                              numBars: 20,
-                              barWidth: 5,
-                              barHeight: 100,
-                              barColor: Colors.blue.shade900,
-                              animationDuration:
-                                  const Duration(milliseconds: 500),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                _buildRadioPlayer(state),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 80,
+                                  child: Equalizer(
+                                    animationControllers: _animationControllers,
+                                    numBars: 20,
+                                    barWidth: 5,
+                                    barHeight: 100,
+                                    barColor: Colors.blue.shade900,
+                                    animationDuration:
+                                        const Duration(milliseconds: 500),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
         Positioned(
           top: 0,
           left: 0,
           right: 0,
-          height: 170,
+          height: 160,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.lightBlue.shade900.withOpacity(0.9),
@@ -154,6 +161,7 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 15,),
                   Text(
                     'Radio Zaitun',
                     style: Theme.of(context).textTheme.headline2,
@@ -190,9 +198,9 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
         return IconButton(
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
-          onPressed: () async{
-            final isConnected = await Connectivity().checkConnectivity();
-            if (isConnected.index == 1) {
+          onPressed: () async {
+            var isConnected = await (Connectivity().checkConnectivity());
+            if (isConnected != ConnectivityResult.none) {
               _animationController.repeat();
               for (final controller in _animationControllers) {
                 controller.repeat(reverse: true);

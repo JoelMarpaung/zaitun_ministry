@@ -33,31 +33,37 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.circular(25.0),
           side: BorderSide(
             color: Colors.brown.shade400,
-            width: 2.0,
+            width: 1.0,
           ),
         ),
         backgroundColor: Colors.white,
         onPressed: () {
           _onItemTapped(1);
         },
-        child: Icon(Icons.radio, color: _selectedIndex == 1 ? Colors.blue[900] : Colors.brown[400]),
+        child: Icon(Icons.radio,
+            color: _selectedIndex == 1 ? Colors.blue[900] : Colors.brown[400]),
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.brown.shade400, width: 2))),
+        height: 40,
+        decoration: BoxDecoration(
+            border: Border(
+                top: BorderSide(color: Colors.brown.shade400, width: 1))),
         child: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
                 icon: const Icon(Icons.event_note),
-                color: _selectedIndex == 0 ? Colors.blue[900] : Colors.brown[400],
+                color:
+                    _selectedIndex == 0 ? Colors.blue[900] : Colors.brown[400],
                 onPressed: () {
                   _onItemTapped(0);
                 },
               ),
               IconButton(
                 icon: const Icon(Icons.info_outline),
-                color: _selectedIndex == 2 ? Colors.blue[900] : Colors.brown[400],
+                color:
+                    _selectedIndex == 2 ? Colors.blue[900] : Colors.brown[400],
                 onPressed: () {
                   _onItemTapped(2);
                 },

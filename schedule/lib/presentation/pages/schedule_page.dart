@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:core/widgets/top_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/domain/entities/event.dart';
@@ -24,20 +25,28 @@ class _SchedulePageState extends State<SchedulePage> {
           BlocProvider.of<ScheduleDataBloc>(context)
               .add(const OnFetchDataSchedule());
           return Stack(
-            children: [
-              const Center(
+            children: const [
+              Center(
                 child: CircularProgressIndicator(),
               ),
-              topTitle()
+              TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Jadwal Radio',
+              )
             ],
           );
         } else if (state is ScheduleLoading) {
           return Stack(
-            children: [
-              const Center(
+            children: const [
+              Center(
                 child: CircularProgressIndicator(),
               ),
-              topTitle()
+              TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Jadwal Radio',
+              )
             ],
           );
         } else if (state is ScheduleError) {
@@ -46,58 +55,31 @@ class _SchedulePageState extends State<SchedulePage> {
               Center(
                 child: Text(state.message),
               ),
-              topTitle()
+              const TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Jadwal Radio',
+              )
             ],
           );
         } else if (state is ScheduleHasData) {
           return Stack(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.only(top: 80),
                 child: buildListView(state.result),
               ),
-              topTitle()
+              const TopTitle(
+                height: 80,
+                blurRadius: 30,
+                text: 'Jadwal Radio',
+              )
             ],
           );
         } else {
           return Container();
         }
       },
-    );
-  }
-
-  Widget topTitle(){
-    return Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 100,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.lightBlue.shade900.withOpacity(0.9),
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(60),
-              bottomRight: Radius.circular(60)),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-              offset: Offset(1.0, 1.0), //(x,y)
-              blurRadius: 30.0,
-            ),
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Jadwal Radio',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
