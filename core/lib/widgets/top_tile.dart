@@ -17,7 +17,7 @@ class TopTitle extends StatelessWidget {
       top: 0,
       left: 0,
       right: 0,
-      height: height,
+      height: height + 20,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.lightBlue.shade900.withOpacity(0.9),

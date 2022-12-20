@@ -223,11 +223,28 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
             }
           },
           iconSize: 100,
-          icon: Icon(
-            Icons.play_circle,
-            color: Colors.indigo.shade900,
+          icon: Stack(
+            children: [
+              const Positioned(
+                left: 5.0,
+                top: 5.0,
+                child: Icon(
+                  Icons.play_circle,
+                  color: Colors.black87,
+                ),
+              ),
+              Positioned(
+                left: 0.0,
+                top: 0.0,
+                child: Icon(
+                  Icons.play_circle,
+                  color: Colors.blue.shade800,
+                ),
+              ),
+            ],
           ),
         );
+
       case RadioPlayerPlay:
         _animationController.repeat();
         for (final controller in _animationControllers) {
@@ -246,9 +263,25 @@ class _RadioPageState extends State<RadioPage> with TickerProviderStateMixin {
             radioPlayerBloc.add(const OnStopRadio());
           },
           iconSize: 100,
-          icon: Icon(
-            Icons.stop_circle,
-            color: Colors.indigo.shade900,
+          icon: Stack(
+            children: [
+              const Positioned(
+                left: 5.0,
+                top: 5.0,
+                child: Icon(
+                  Icons.stop_circle,
+                  color: Colors.black87,
+                ),
+              ),
+              Positioned(
+                left: 0.0,
+                top: 0.0,
+                child: Icon(
+                  Icons.stop_circle,
+                  color: Colors.blue.shade800,
+                ),
+              ),
+            ],
           ),
         );
       case RadioPlayerLoading:

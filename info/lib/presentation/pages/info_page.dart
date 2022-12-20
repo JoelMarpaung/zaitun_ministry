@@ -69,7 +69,7 @@ class _InfoPageState extends State<InfoPage> {
           return Stack(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.only(top: 110),
                 child: buildIListInfo(state.result),
               ),
               const TopTitle(

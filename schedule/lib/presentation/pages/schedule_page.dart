@@ -66,7 +66,7 @@ class _SchedulePageState extends State<SchedulePage> {
           return Stack(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 80),
+                padding: const EdgeInsets.only(top: 90),
                 child: buildListView(state.result),
               ),
               const TopTitle(
