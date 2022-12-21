@@ -11,8 +11,9 @@ Version 2.0.0
 - Using BLoC sate management
 - Using clean architecture
 
-![alt text](https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/1.png | width=100)
-
+![](https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/1.png | width=100)
+<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/c236e437354999c52ba70c51d96fb043fdcc9c45/screenshots/1.png" width="150">
+<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/1.png" width="150">
 Version 1.0.1
 Update :
 - Change app name
