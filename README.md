@@ -4,6 +4,7 @@ Zaitun Ministry Mobile Application
 
 ## Getting Started
 This application is built with flutter.
+
 Version 2.0.0
 - Change entire app UI
 - Using null safety
