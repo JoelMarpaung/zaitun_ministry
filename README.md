@@ -11,11 +11,7 @@ Version 2.0.0
 - Using BLoC sate management
 - Using clean architecture
 
-<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/1.png" width="150">
-<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/2.png" width="150">
-<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/3.png" width="150">
-<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/4.png" width="150">
-<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/5.png" width="150">
+<img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/1.png" width="150"><img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/2.png" width="150"><img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/3.png" width="150"><img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/4.png" width="150"><img src="https://github.com/JoelMarpaung/zaitun_ministry/blob/main/screenshots/5.png" width="150">
 
 Version 1.0.1
 Update :
